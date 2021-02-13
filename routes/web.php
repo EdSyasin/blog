@@ -21,11 +21,11 @@ Route::get('/', function () {
 
 Route::get('/login', function () {
     return view('login');
-});
+})->name('login');
 
 Route::post('/login', [\App\Http\Controllers\UserController::class, "login"]);
 
-Route::get('/newpost', function () {
+Route::middleware('auth')->get('/newpost', function () {
     return view('new_post');
 });
 
@@ -37,3 +37,10 @@ Route::get('/ajaxtest', function () {
         return "fucked";
     }
 });
+
+Route::prefix('ajax')->group(function () {
+    Route::middleware('auth')->post('/editorjs', [\App\Http\Controllers\FileController::class, "uploadFileForEditorJS"]);
+    //Posts
+    Route::middleware('auth')->post('/posts', [\App\Http\Controllers\PostController::class, "store"]);
+});
+

@@ -24,7 +24,7 @@
     </head>
     <body class="antialiased">
         <main class="editorMain">
-            <input id="title" class="editorInput" placeholder="Заголовок"/>
+            <input id="editorTitle" class="editorInput" placeholder="Заголовок"/>
             <div id="editorjs">
 
             </div>

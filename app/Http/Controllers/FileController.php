@@ -11,11 +11,6 @@ use Illuminate\Support\Facades\Storage;
 class FileController extends Controller
 {
     function uploadFileForEditorJS(Request $request){
-        if(Auth::check()){
-            Log::info(Auth::id());
-        } else {
-            Log::info(Auth::check());
-        }
         if($request->hasFile('image')){
             $file = $request->file("image");
         } else {
@@ -30,6 +25,9 @@ class FileController extends Controller
         $newFile->name = $originalName;
         $newFile->path = $path;
         $newFile->extension = $extension;
+        if(Auth::check()){
+            $newFile->user_id = Auth::id();
+        }
 
         $newFile->save();
 

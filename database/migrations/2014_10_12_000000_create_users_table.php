@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->integer('role')->default(3);
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
