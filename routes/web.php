@@ -40,6 +40,7 @@ Route::get('/ajaxtest', function () {
 
 Route::prefix('ajax')->group(function () {
     Route::middleware('auth')->post('/editorjs', [\App\Http\Controllers\FileController::class, "uploadFileForEditorJS"]);
+    Route::middleware('auth')->post('/files', [\App\Http\Controllers\FileController::class, "upload"]);
     //Posts
     Route::middleware('auth')->post('/posts', [\App\Http\Controllers\PostController::class, "store"]);
 });

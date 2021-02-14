@@ -8,6 +8,8 @@
         top: 0;
         right: 0;
         margin: 46px 0 0 376px;
+        display: flex;
+        align-items: center;
 
         .publicButton{
             Font-family: CustomSansSerif,'Lucida Grande',Arial,sans-serif;
@@ -20,7 +22,6 @@
             border-radius: 16px;
             text-transform: uppercase;
             padding: 4px 12px;
-            margin: 0 0 15px;
             background-color: #fff;
             cursor: pointer;
 
@@ -30,6 +31,7 @@
         }
     }
 }
+
 .editorInput{
     font-size: 2em;
     margin: 21px 37px 12px;
@@ -40,6 +42,15 @@
     }
 }
 
+.editorSettingsButton{
+    margin-left: 10px;
+}
+
+.editorCardSettings{
+    width: 500px;
+
+}
+
 @media(max-width: 964px){
     .editorMain{
 
@@ -47,6 +58,7 @@
             position: relative;
             left: 0;
             margin: 0;
+            justify-content: space-between;
         }
     }
 }

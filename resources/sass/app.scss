@@ -1,0 +1,18 @@
+@import "~@mdi/font/scss/materialdesignicons.scss";
+//components
+@import "components/overlay.scss";
+@import "components/card.scss";
+@import "components/imageUploader.scss";
+
+$main: #4F6B9A;
+
+
+.buttonIcon{
+    font-size: 2em;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover{
+        color: $main;
+    }
+}

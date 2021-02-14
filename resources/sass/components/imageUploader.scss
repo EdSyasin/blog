@@ -1,0 +1,40 @@
+.imageUploader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    .imageUploader__input{
+        display: flex;
+        position: relative;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+
+        img{
+            width: 100%;
+        }
+
+        .mdi{
+            font-size: 2em;
+        }
+
+        &:before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #00183f;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: .3s;
+        }
+
+        &:hover:before{
+            opacity: 0.2;
+        }
+
+
+    }
+}

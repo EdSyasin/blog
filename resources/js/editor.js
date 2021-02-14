@@ -2,12 +2,20 @@ import EditorJS from "@editorjs/editorjs";
 import ImageTool from '@editorjs/image';
 import AttachesTool from "@editorjs/attaches";
 import Header from "@editorjs/header";
+import Overlay from "./Overlay";
+import ImageUploader from "./ImageUploader";
 import Axios from "axios";
+//require("./Overlay");
 
 let editorTitle = document.getElementById('editorTitle');
 let publicButton = document.getElementById('publicButton');
+let overlaySettings = new Overlay('editorSettingsOverlay');
+document.getElementById('editorSettingsButton').addEventListener('click', () => {
+    overlaySettings.toggle();
+})
+//debugger
+let imageUploader = new ImageUploader("postImage");
 
-let title = '';
 
 let editor = new EditorJS({
     /**
@@ -44,14 +52,17 @@ let editor = new EditorJS({
 publicButton.addEventListener('click', () => {
     editor.save()
         .then(content => {
-            const data = {
+            let data = {
                 title: editorTitle.value,
                 content: content
             };
+            if(imageUploader.URL){
+                data.image = imageUploader.URL;
+            }
             axios
                 .post('/ajax/posts?status=published', JSON.stringify(data), {headers: {"Content-Type": "application/json"}})
                 .then(() => {
-                    alert("Запись сохранена!")
+                    alert("Запись опубликованна!")
                 })
                 .catch(() => {
                     alert("Что-то пошло не так!")
@@ -61,10 +72,6 @@ publicButton.addEventListener('click', () => {
 })
 
 
-axios.get("/ajaxtest")
-    .then(response => {
-        console.log(response.data)
-    })
 
 
 

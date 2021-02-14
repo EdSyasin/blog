@@ -13,6 +13,9 @@ class PostController extends Controller
         $post->title = $request->input('title');
         $post->content = $request->input('content');
         $post->user_id = Auth::id();
+        if($request->has('image')){
+            $post->image = $request->input('image');
+        }
         if($request->has('status')){
             if($request->input('status') == "published"){
                 $post->published_at = now();

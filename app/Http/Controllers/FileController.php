@@ -10,6 +10,34 @@ use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
 {
+    public function upload(Request $request){
+        $file = $request->file("file");
+        $originalName = $file->getClientOriginalName();
+        $extension = $file->getClientOriginalExtension();
+        $directory = "public";
+        $path = Storage::putFile($directory, $file);
+
+        $newFile = new File;
+        $newFile->name = $originalName;
+        $newFile->path = $path;
+        $newFile->extension = $extension;
+        if(Auth::check()){
+            $newFile->user_id = Auth::id();
+        }
+
+        $newFile->save();
+
+        $res = [
+            "file" => [
+                "url" => Storage::url($path),
+                "name" => $originalName,
+                "extension" => $extension
+            ]
+        ];
+
+        return response()->json($res, 200);
+    }
+
     function uploadFileForEditorJS(Request $request){
         if($request->hasFile('image')){
             $file = $request->file("image");
