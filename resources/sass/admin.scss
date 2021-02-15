@@ -1,0 +1,29 @@
+.adminWrapper{
+    display: flex;
+    height: 100vh;
+
+    .adminSidebar{
+        width: 200px;
+        background: #718096;
+
+        ul{
+            list-style: none;
+            padding: 0;
+
+            li{
+                font-size: 1.2em;
+                a{
+                    display: block;
+                    text-decoration: none;
+                    padding: 12px 16px;
+                }
+            }
+        }
+    }
+
+    .adminMain{
+        flex: 1;
+        overflow: scroll;
+        padding: 0 16px ;
+    }
+}

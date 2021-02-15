@@ -25,6 +25,7 @@
     "dependencies": {
         "@editorjs/editorjs": "^2.19.1",
         "@editorjs/header": "^2.6.1",
-        "@mdi/font": "^5.9.55"
+        "@mdi/font": "^5.9.55",
+        "bootstrap": "^4.6.0"
     }
 }

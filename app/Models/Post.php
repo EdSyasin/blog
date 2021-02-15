@@ -13,4 +13,16 @@ class Post extends Model
     protected $casts = [
         "content" => Json::class
     ];
+
+    public function getFirstParagraphAttribute(){
+        $content = $this->content;
+        foreach ($content->blocks as $block ){
+            if($block->type === 'paragraph'){
+                //var_dump(substr($block->data->text, 0, 150)) . '...';
+                $res = $block->data->text;
+                return $res;
+            }
+        }
+
+    }
 }

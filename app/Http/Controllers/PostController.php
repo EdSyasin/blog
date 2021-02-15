@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
+    public function adminShow(Request $request){
+        $posts = Post::get();
+        return view("admin.posts", ["posts" => $posts]);
+    }
+
     public function store(Request $request){
         $post = new Post();
         $post->title = $request->input('title');

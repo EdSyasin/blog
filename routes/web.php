@@ -38,6 +38,10 @@ Route::get('/ajaxtest', function () {
     }
 });
 
+Route::prefix('admin')->group(function () {
+    Route::middleware('auth')->get('/posts', [\App\Http\Controllers\PostController::class, "adminShow"]);
+});
+
 Route::prefix('ajax')->group(function () {
     Route::middleware('auth')->post('/editorjs', [\App\Http\Controllers\FileController::class, "uploadFileForEditorJS"]);
     Route::middleware('auth')->post('/files', [\App\Http\Controllers\FileController::class, "upload"]);
