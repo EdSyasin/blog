@@ -5,6 +5,7 @@
 @import "components/overlay.scss";
 @import "components/card.scss";
 @import "components/imageUploader.scss";
+@import "components/customButton";
 
 $main: #4F6B9A;
 
@@ -17,4 +18,8 @@ $main: #4F6B9A;
     &:hover{
         color: $main;
     }
+}
+
+.flexSpacer{
+    flex: 1;
 }

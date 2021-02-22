@@ -47,5 +47,6 @@ Route::prefix('ajax')->group(function () {
     Route::middleware('auth')->post('/files', [\App\Http\Controllers\FileController::class, "upload"]);
     //Posts
     Route::middleware('auth')->post('/posts', [\App\Http\Controllers\PostController::class, "store"]);
+    Route::middleware("auth")->delete("posts/{id}", [\App\Http\Controllers\PostController::class, "delete"]);
 });
 

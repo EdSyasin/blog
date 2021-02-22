@@ -12,10 +12,16 @@
 
             li{
                 font-size: 1.2em;
+
                 a{
                     display: block;
                     text-decoration: none;
                     padding: 12px 16px;
+                    transition: 0.3s;
+
+                    &:hover{
+                        background: white;
+                    }
                 }
             }
         }

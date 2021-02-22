@@ -1,0 +1,89 @@
+/**
+Custom button
+ */
+
+.customButton{
+    text-transform: uppercase;
+    font-family: "PT Sans";
+    font-weight: bold;
+    font-size: 14px;
+    letter-spacing: .0892857143em;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    //letter-spacing: 0.24px;
+    border: none;
+    padding: 0 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+a.customButton{
+    text-decoration: none;
+}
+
+
+
+.customButton:focus{
+    outline: none;
+}
+
+
+.customButton_text{
+    background-color: transparent;
+    position: relative;
+    color: darkblue;
+
+    &:before {
+        //background-color: $navy;
+        bottom: 0;
+        content: "";
+        left: 0;
+        opacity: 0;
+        pointer-events: none;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: 0.3s;
+    }
+
+    &:hover:before {
+        opacity: .07;
+    }
+}
+
+.customButton_icon{
+    background-color: transparent;
+    font-size: 24px;
+    color: lightblue;
+
+
+    &:hover{
+        color: blue;
+    }
+}
+
+.customButton_block{
+    display: block;
+    width: 100%;
+    position: relative;
+
+    &:before {
+        background-color: darkblue;
+        bottom: 0;
+        content: "";
+        left: 0;
+        opacity: 0;
+        pointer-events: none;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transition: 0.3s;
+    }
+
+    &:hover:before {
+        opacity: .07;
+    }
+
+}

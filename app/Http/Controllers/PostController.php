@@ -30,4 +30,13 @@ class PostController extends Controller
 
         return response()->json(['post' => $post], 201);
     }
+
+    public function delete(Request $request, $id){
+        $post = Post::where("id", $id)->first();
+        if(!$post){
+            return response('Post is not found!', 404);
+        }
+        $post->delete();
+        return response("Post $id has been deleted", 200);
+    }
 }
