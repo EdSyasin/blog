@@ -8,7 +8,17 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    public function adminShow(Request $request){
+    public function show($id){
+        $post = Post::where("id", $id)->whereNotNull("published_at")->first();
+        if(!$post){
+            abort(404);
+        }
+
+        return view('post', ["post" => $post]);
+
+    }
+
+    public function adminShow(){
         $posts = Post::get();
         return view("admin.posts", ["posts" => $posts]);
     }
@@ -31,7 +41,7 @@ class PostController extends Controller
         return response()->json(['post' => $post], 201);
     }
 
-    public function delete(Request $request, $id){
+    public function delete($id){
         $post = Post::where("id", $id)->first();
         if(!$post){
             return response('Post is not found!', 404);

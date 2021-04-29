@@ -12,15 +12,24 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .js('resources/js/editor.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
-        //
-    ])
+    .ts('resources/js/admin/main.ts', 'public/js/admin.js')
+    .vue()
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/editor.scss', 'public/css')
     .webpackConfig({
         module: {
             rules: [
+                {
+                    test: /\.jsx?$/,
+                    exclude: /bower_components/,
+                    use: {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: ['@babel/preset-env'],
+                            plugins: ['@babel/plugin-syntax-dynamic-import']
+                        }
+                    }
+                },
                 {
                     test: /\.tsx?$/,
                     loader: "ts-loader",
@@ -31,4 +40,7 @@ mix.js('resources/js/app.js', 'public/js')
         resolve: {
             extensions: ["*", ".js", ".jsx", ".vue", ".ts", ".tsx"]
         }
+    })
+    .babelConfig({
+        plugins: ['@babel/plugin-syntax-dynamic-import'],
     });

@@ -19,6 +19,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
 Route::get('/login', function () {
     return view('login');
 })->name('login');
@@ -40,7 +42,17 @@ Route::get('/ajaxtest', function () {
 
 Route::prefix('admin')->group(function () {
     Route::middleware('auth')->get('/posts', [\App\Http\Controllers\PostController::class, "adminShow"]);
+    Route::get('/', function (){
+        return view('admin');
+    });
+    Route::get('/posts/new', function (){
+        return view('admin');
+    });
 });
+
+
+Route::get('/post/{id}', [\App\Http\Controllers\PostController::class, "show"]);
+
 
 Route::prefix('ajax')->group(function () {
     Route::middleware('auth')->post('/editorjs', [\App\Http\Controllers\FileController::class, "uploadFileForEditorJS"]);

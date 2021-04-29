@@ -1,0 +1,18 @@
+.mainHeader{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px;
+
+    .mainHeader__name{
+        font-weight: bold;
+        font-size: 1.5em;
+    }
+
+    .mainHeader__description{
+        font-size: 0.8em;
+        font-style: italic;
+        color: lightgrey;
+    }
+}
