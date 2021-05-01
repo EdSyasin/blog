@@ -20,12 +20,9 @@ Route::get('/', function () {
 });
 
 
-
-Route::get('/login', function () {
-    return view('login');
-})->name('login');
-
-Route::post('/login', [\App\Http\Controllers\UserController::class, "login"]);
+Route::get('/login', function (){
+    return view('admin');
+});
 
 Route::middleware('auth')->get('/newpost', function () {
     return view('new_post');
@@ -40,15 +37,9 @@ Route::get('/ajaxtest', function () {
     }
 });
 
-Route::prefix('admin')->group(function () {
-    Route::middleware('auth')->get('/posts', [\App\Http\Controllers\PostController::class, "adminShow"]);
-    Route::get('/', function (){
-        return view('admin');
-    });
-    Route::get('/posts/new', function (){
-        return view('admin');
-    });
-});
+Route::get('/admin/{any?}', function() {
+    return view('admin');
+})->where('any', '.*');
 
 
 Route::get('/post/{id}', [\App\Http\Controllers\PostController::class, "show"]);

@@ -14,6 +14,6 @@ export default class About extends Vue{
 
 <style lang="scss">
 .kek{
-    font-size: 50px;
+    font-size: 70px;
 }
 </style>
