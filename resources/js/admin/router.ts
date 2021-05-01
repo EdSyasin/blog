@@ -14,7 +14,7 @@ const routes = [
     {
         path: '/admin/posts/new',
         name: 'PostCreate',
-        component: () => import( /*webpackChunkName: "PostEditor" */ './views/PostCreate.vue')
+        component: () => import( /* webpackChunkName: "PostEditor" */ './views/PostCreate.vue')
     }
 ];
 

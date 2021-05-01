@@ -1,5 +1,8 @@
 require('./bootstrap');
 
+const uploader = () => import("ImageUploader");
+
+let kek = new uploader();
 
 
 window.deletePost = function(id){

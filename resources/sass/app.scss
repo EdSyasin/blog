@@ -1,6 +1,7 @@
 @import "~bootstrap/scss/bootstrap-grid";
-@import "~@mdi/font/scss/materialdesignicons.scss";
+//@import "~@mdi/font/scss/materialdesignicons.scss";
 @import "./admin.scss";
+@import "editor";
 //components
 @import "components/mainHeader";
 @import "components/overlay.scss";
