@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import store from "./store/index";
 
 Vue.use(VueRouter);
 
@@ -18,7 +19,8 @@ const routes = [
         name: "Admin",
         component: () => import( /* webpackChunkName: "About" */ './views/About.vue'),
         meta: {
-            title: "О сайте"
+            title: "Админка",
+            authRequired: true
         }
     },
     {
@@ -26,7 +28,8 @@ const routes = [
         name: 'PostCreate',
         component: () => import( /* webpackChunkName: "PostEditor" */ './views/post-create/PostCreate.vue'),
         meta: {
-            title: "Новый пост"
+            title: "Новый пост",
+            authRequired: true
         }
     }
 ];
@@ -38,9 +41,15 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
+    if(to.meta.authRequired){
+        if(!store.getters.isLogin){
+            next('/login')
+        }
+    }
     if(to.meta.title){
         document.title = to.meta.title;
     }
+
     next();
 })
 

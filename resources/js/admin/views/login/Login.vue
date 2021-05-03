@@ -2,28 +2,43 @@
     <main class="main-login">
         <form class="login-form" onsubmit="return false;" @keypress.enter="submit">
 
-            <c-text-field type="text" v-model="login" placeholder="Логин"></c-text-field>
+            <c-text-field type="text" v-model="username" placeholder="Логин"></c-text-field>
             <c-text-field type="password" v-model="password" placeholder="Пароль"></c-text-field>
 
-            <button>Войти</button>
+            <c-button @click="submit">Войти</c-button>
         </form>
     </main>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+import axios from "axios";
 
 export default Vue.extend( {
     name: "Login",
     data() {
         return {
-            login : '',
+            username : '',
             password: ''
         }
     },
     methods: {
         submit(){
-            alert(this.login + this.password);
+            const body = {
+                "username": this.username,
+                'password': this.password
+            };
+
+            axios
+                .post('/ajax/auth/login', JSON.stringify(body), {headers:{"Content-Type": "application/json"}})
+                .then(res => {
+                    this.$store.commit("SET_USER", res.data.user);
+                    this.$router.push("/admin");
+                })
+                .catch(e => {
+                    console.error(e);
+                })
+
         }
     }
 })

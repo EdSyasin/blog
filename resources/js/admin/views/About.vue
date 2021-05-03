@@ -1,5 +1,7 @@
 <template>
-    <div class="kek">lol</div>
+    <div class="kek">
+        <router-link to="/login">login</router-link>
+    </div>
 </template>
 
 <script lang="ts">

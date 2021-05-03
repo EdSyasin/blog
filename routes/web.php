@@ -44,8 +44,17 @@ Route::get('/admin/{any?}', function() {
 
 Route::get('/post/{id}', [\App\Http\Controllers\PostController::class, "show"]);
 
+Route::get('/csrf', function () {
+    return csrf_token();
+});
+
+
 
 Route::prefix('ajax')->group(function () {
+    Route::get('/auth/user', [\App\Http\Controllers\AuthController::class, "user"]);
+    Route::post('/auth/login', [\App\Http\Controllers\AuthController::class, "login"]);
+
+
     Route::middleware('auth')->post('/editorjs', [\App\Http\Controllers\FileController::class, "uploadFileForEditorJS"]);
     Route::middleware('auth')->post('/files', [\App\Http\Controllers\FileController::class, "upload"]);
     //Posts

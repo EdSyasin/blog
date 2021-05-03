@@ -30,11 +30,11 @@ export default Vue.extend({
     },
     computed: {
         text: {
-            get(){
+            get():string {
                 return this.value
             },
-            set(value: string){
-                this.$emit('input', value);
+            set(val: string){
+                this.$emit('input', val);
             }
         }
     }

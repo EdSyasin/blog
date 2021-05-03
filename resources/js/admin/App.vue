@@ -1,6 +1,6 @@
 <template>
     <component :is="layout">
-        <router-view></router-view>
+        <router-view v-if="!loading"></router-view>
     </component>
 </template>
 
@@ -9,8 +9,15 @@ import {Vue, Component} from 'vue-property-decorator';
 
 @Component
 export default class App extends Vue{
+    private loading = true;
+
     get layout(){
         return this.$route.meta.layout || 'default-layout';
+    }
+
+    created(){
+        this.$store.dispatch('GET_USER');
+        this.loading = false;
     }
 }
 
