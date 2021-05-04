@@ -24,6 +24,15 @@ const routes = [
         }
     },
     {
+        path: '/admin/posts',
+        name: 'Posts',
+        component: () => import( /* webpackChunkName: "PostEditor" */ './views/posts/Posts.vue'),
+        meta: {
+            title: "Публикации",
+            authRequired: true
+        }
+    },
+    {
         path: '/admin/posts/new',
         name: 'PostCreate',
         component: () => import( /* webpackChunkName: "PostEditor" */ './views/post-create/PostCreate.vue'),
