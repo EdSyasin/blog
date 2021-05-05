@@ -15,10 +15,12 @@
         <style>
 
         </style>
-        <script  src="{{ mix('/js/app.js') }}"></script>
+
     </head>
     <body class="antialiased">
-        <header class="adminHeader"></header>
+        <header class="adminHeader">
+            <a href="/newpost" class="customButton">Новая публикация</a>
+        </header>
         <div class="adminWrapper">
             <aside class="adminSidebar">
                 @yield("sidebar")
@@ -28,6 +30,6 @@
                 @yield('content')
             </main>
         </div>
-
+        <script src="{{ mix('/js/app.js') }}"></script>
     </body>
 </html>

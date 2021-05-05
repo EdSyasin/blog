@@ -1,9 +1,9 @@
 <template>
     <main class="main-login">
-        <form class="login-form" onsubmit="return false;" @keypress.enter="submit">
+        <form class="login-form" onsubmit="return false;" >
 
-            <c-text-field type="text" v-model="username" placeholder="Логин"></c-text-field>
-            <c-text-field type="password" v-model="password" placeholder="Пароль"></c-text-field>
+            <c-text-field type="text" v-model="username" placeholder="Логин" @keypress.enter="submit"></c-text-field>
+            <c-text-field type="password" v-model="password" placeholder="Пароль" @keypress.enter="submit"></c-text-field>
 
             <c-button @click="submit">Войти</c-button>
         </form>

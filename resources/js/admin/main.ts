@@ -2,6 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import store from "./store/index";
+import Axios from "axios";
 
 
 //Layouts
@@ -15,6 +16,8 @@ import InputText from "./components/form/InputText.vue";
 Vue.component('c-text-field', InputText);
 import Button from "./components/Button.vue";
 Vue.component('c-button', Button);
+
+Vue.prototype.$http = Axios
 
 new Vue({
     router,
