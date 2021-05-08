@@ -46,10 +46,10 @@ export default class Paragraph extends Shit {
     focus(){
         const element = this.$refs.paragraph as HTMLParagraphElement;
         if(element.innerHTML.length > 0){
-            let range = document.createRange();//Create a range (a range is a like the selection but invisible)
+            let range = document.createRange() as Range;//Create a range (a range is a like the selection but invisible)
             range.selectNodeContents(element);//Select the entire contents of the element with the range
             range.collapse(false);//collapse the range to the end point. false means collapse to end rather than the start
-            let selection = window.getSelection();//get the selection object (allows you to change selection)
+            let selection = window.getSelection() as Selection;//get the selection object (allows you to change selection)
             selection.removeAllRanges();//remove any selections already made
             selection.addRange(range);
         }
