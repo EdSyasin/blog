@@ -38,7 +38,8 @@ const routes = [
         component: () => import( /* webpackChunkName: "PostEditor" */ './views/post-create/PostCreate.vue'),
         meta: {
             title: "Новый пост",
-            authRequired: true
+            authRequired: true,
+            layout: "clean-layout"
         }
     }
 ];

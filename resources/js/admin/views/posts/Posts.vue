@@ -1,6 +1,6 @@
 <template>
     <main>
-        <h1>Публикации</h1>
+        <h1>Публикации <router-link to="/admin/posts/new" ><span class="mdi mdi-plus"></span></router-link></h1>
 
     </main>
 </template>
