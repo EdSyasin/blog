@@ -46,10 +46,12 @@ export default class Editor extends Vue {
     }
 
     removeBlock(index: number){
-        this.blocks.splice(index, 1);
-        if(this.blocks[index - 1].type === 'paragraph'){
-            const refs = this.$refs[`block-${index - 1}`] as Array<HTMLParagraphElement>;
-            refs[0].focus();
+        if(index !== 0){
+            this.blocks.splice(index, 1);
+            if(this.blocks[index - 1].type === 'paragraph'){
+                const refs = this.$refs[`block-${index - 1}`] as Array<HTMLParagraphElement>;
+                refs[0].focus();
+            }
         }
     }
 }
