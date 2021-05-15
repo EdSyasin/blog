@@ -4,7 +4,6 @@ import router from './router';
 import store from "./store/index";
 import Axios from "axios";
 
-
 //Layouts
 import Clean from "./layouts/Clean.vue";
 Vue.component('clean-layout', Clean)

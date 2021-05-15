@@ -6,9 +6,16 @@
 
 <script lang="ts">
 import {Vue, Component} from 'vue-property-decorator';
+import uniqueId from "../services/uniqueId";
 
-@Component
+@Component({
+    provide: {
+        uniqueId: uniqueId
+    }
+})
 export default class App extends Vue{
+
+
     private loading = true;
 
     get layout(){

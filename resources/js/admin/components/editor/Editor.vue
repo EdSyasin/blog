@@ -4,55 +4,117 @@
                 v-for="(item, index) in blocks"
                 :is="item.type"
                 v-model="item.block"
-                :key="index"
+                :key="item.id"
+                :index="index"
                 @next-block="addBlock(index)"
                 @remove="removeBlock(index)"
+                @clean-and-focus="e => setButtonsGroup(e)"
                 :ref="`block-${index}`"
+                class="block"
+                :class="{'block_first': index === 0}"
         >
-
         </component>
+        <div class="addButtonsGroup" :ref="'addButtonsGroup'">
+            <a class="mdi mdi-image"></a>
+        </div>
     </div>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue, {PropType} from "vue";
 import Component from "vue-class-component";
+import uniqueId from "../../../services/uniqueId";
 //Blocks
 import Paragraph from "./blocks/Paragraph.vue";
 
-
-@Component({
+export default Vue.extend({
+    name: 'Editor',
+    props: {
+        value: {
+            type: Array as PropType<IBlock[]>,
+            default: () => [
+                {
+                    type: 'paragraph',
+                    block: {
+                        text: ''
+                    }
+                }
+            ]
+        }
+    },
+    data(){
+        return {
+            blocks: [] as IBlock[]
+        }
+    },
     components: {
         Paragraph
+    },
+    watch: {
+        blocks: {
+            deep: true,
+            handler(){
+                this.$emit('input', this.blocks.map((e: IBlock) => ({
+                    type: e.type,
+                    block: e.block
+                })))
+            }
+        }
+    },
+    methods:{
+        addBlock(prevIndex: number): void{
+            this.blocks.splice(prevIndex + 1, 0, {
+                id: uniqueId('block') as string,
+                type: "paragraph",
+                block: {
+                    text: ''
+                }
+            })
+        },
+        removeBlock(index: number): void{
+            if(index !== 0){
+                this.blocks.splice(index, 1);
+                if(this.blocks[index - 1].type === 'paragraph'){
+                    const refs = this.$refs[`block-${index - 1}`] as Array<HTMLParagraphElement>;
+                    refs[0].focus();
+                }
+            }
+        },
+        setButtonsGroup(evtData: {show: boolean, el?: HTMLElement}){
+            let btnsGroup = this.$refs.addButtonsGroup as HTMLDivElement;
+            if(evtData.show){
+                btnsGroup.classList.add('addButtonsGroup_shown');
+                btnsGroup.style.top = `${evtData.el?.offsetTop}px`;
+            } else {
+                btnsGroup.classList.remove('addButtonsGroup_shown');
+            }
+        }
+    },
+    created(){
+        this.blocks = this.value.map((e: IBlock) => ({
+            ...e,
+            id: uniqueId('block') as string
+        }))
     }
 })
-export default class Editor extends Vue {
-    private blocks = [
-        {
-            type: 'paragraph',
-            block: {
-                text: ''
-            }
-        }
-    ];
 
-    addBlock(prevIndex: number){
-        this.blocks.splice(prevIndex + 1, 0, {
-            type: "paragraph",
-            block: {
-                text: ''
-            }
-        })
+
+</script>
+
+<style lang="scss">
+.editor{
+    position: relative;
+
+    .addButtonsGroup{
+        position: absolute;
+        left: -20px;
+        display: none;
+        height: 16px;
+        font-size: 16px;
     }
 
-    removeBlock(index: number){
-        if(index !== 0){
-            this.blocks.splice(index, 1);
-            if(this.blocks[index - 1].type === 'paragraph'){
-                const refs = this.$refs[`block-${index - 1}`] as Array<HTMLParagraphElement>;
-                refs[0].focus();
-            }
-        }
+    .addButtonsGroup_shown{
+        display: flex;
     }
 }
-</script>
+</style>

@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
     entry: {
         vue: "./resources/js/admin/main.ts",
-        app: "./resources/sass/app.scss"
+        app: "./resources/scss/app.scss"
     },
     output: {
         filename: "js/[name].bundle.js",
@@ -73,22 +73,6 @@ module.exports = {
                     }
                 ]
             }
-            // {
-            //     test: /\.vue\.(s?[ac]ss)$/,
-            //     use: ['vue-style-loader', 'css-loader', 'sass-loader']
-            // },
-            // {
-            //     //test: /\.(scss|css)$/,
-            //     test: /(?<!\.vue)\.(s?[ac]ss)$/,
-            //     sideEffects: true,
-            //     use: [
-            //         MiniCssExtractPlugin.loader,
-            //         //'vue-style-loader',
-            //         'css-loader',
-            //         'sass-loader',
-            //
-            //     ]
-            // }
         ]
     },
     resolve: {

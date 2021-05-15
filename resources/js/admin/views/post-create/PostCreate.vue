@@ -1,7 +1,7 @@
 <template>
     <main class="editorMain">
         <input id="editorTitle" class="editorInput" placeholder="Заголовок" v-model="post.title"/>
-        <editor/>
+        <editor v-model="post.blocks" />
 
         <aside class="buttonContainer">
             <button id="publicButton" class="publicButton">Publish</button>
@@ -14,13 +14,20 @@
     import Vue from 'vue';
     import Editor from "../../components/editor/Editor.vue";
 
-
     export default Vue.extend({
         name: "PostCreate",
         data() {
             return {
                post: {
-                   title: ''
+                   title: '',
+                   blocks: [
+                       {
+                           type: 'paragraph',
+                           block: {
+                               text: ''
+                           }
+                       }
+                   ] as IBlock[]
                }
             }
         },
