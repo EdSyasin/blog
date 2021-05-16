@@ -22,17 +22,25 @@
         >
         <div class="addButtonsGroup" :ref="'addButtonsGroup'" style="top: 0">
             <button @click="addImage">
-                <span class="mdi mdi-image" aria-hidden></span>
+                <span class="mdi mdi-image"/>
             </button>
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import Vue, {PropType} from "vue";
-import uniqueId from "../../../services/uniqueId";
+import Vue_, {PropType, VueConstructor} from "vue";
+
 //Blocks
 import Paragraph from "./blocks/Paragraph.vue";
+
+const Vue = Vue_ as VueConstructor<Vue_ & {
+    uniqueId(prefix: string): string;
+    $refs: {
+        'image-input': HTMLInputElement,
+        addButtonsGroup : HTMLDivElement
+    }
+}>
 
 export default Vue.extend({
     name: 'Editor',
@@ -49,6 +57,7 @@ export default Vue.extend({
             ]
         }
     },
+    inject: ['uniqueId'],
     data(){
         return {
             blocks: [] as IBlock[]
@@ -71,7 +80,7 @@ export default Vue.extend({
     methods:{
         addBlock(prevIndex: number): void{
             this.blocks.splice(prevIndex + 1, 0, {
-                id: uniqueId('block') as string,
+                id: this.uniqueId('block') as string,
                 type: "paragraph",
                 block: {
                     text: ''
@@ -88,7 +97,7 @@ export default Vue.extend({
             }
         },
         setButtonsGroup(evtData: {show: boolean, el?: HTMLElement}){
-            let btnsGroup = this.$refs.addButtonsGroup as HTMLDivElement;
+            let btnsGroup = this.$refs.addButtonsGroup;
             if(evtData.show){
                 btnsGroup.classList.add('addButtonsGroup_shown');
                 btnsGroup.style.top = `${evtData.el?.offsetTop}px`;
@@ -97,13 +106,13 @@ export default Vue.extend({
             }
         },
         addImage(){
-            (this.$refs["image-input"] as HTMLInputElement).click();
+            this.$refs["image-input"].click();
         }
     },
     created(){
         this.blocks = this.value.map((e: IBlock) => ({
             ...e,
-            id: uniqueId('block') as string
+            id: this.uniqueId('block') as string
         }))
     }
 })
@@ -117,7 +126,6 @@ export default Vue.extend({
 
     .addButtonsGroup{
         position: absolute;
-        //left: -20px;
         right: 100%;
         display: none;
         font-size: 16px;
