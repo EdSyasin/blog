@@ -14,15 +14,22 @@
                 :class="{'block_first': index === 0}"
         >
         </component>
-        <div class="addButtonsGroup" :ref="'addButtonsGroup'">
-            <a class="mdi mdi-image"></a>
+        <input
+                type="file"
+                accept="image/gif, image/jpeg, image/png"
+                ref="image-input"
+                style="display: none"
+        >
+        <div class="addButtonsGroup" :ref="'addButtonsGroup'" style="top: 0">
+            <button @click="addImage">
+                <span class="mdi mdi-image" aria-hidden></span>
+            </button>
         </div>
     </div>
 </template>
 
 <script lang="ts">
 import Vue, {PropType} from "vue";
-import Component from "vue-class-component";
 import uniqueId from "../../../services/uniqueId";
 //Blocks
 import Paragraph from "./blocks/Paragraph.vue";
@@ -88,6 +95,9 @@ export default Vue.extend({
             } else {
                 btnsGroup.classList.remove('addButtonsGroup_shown');
             }
+        },
+        addImage(){
+            (this.$refs["image-input"] as HTMLInputElement).click();
         }
     },
     created(){
@@ -107,14 +117,44 @@ export default Vue.extend({
 
     .addButtonsGroup{
         position: absolute;
-        left: -20px;
+        //left: -20px;
+        right: 100%;
         display: none;
-        height: 16px;
         font-size: 16px;
+        transform: translateY(-6px);
+
+        button{
+            font-size: 2em;
+            cursor: pointer;
+            margin-left: 10px;
+            background: none;
+            display: block;
+
+            &:hover{
+                color: gray;
+            }
+        }
     }
 
     .addButtonsGroup_shown{
         display: flex;
+
+    }
+}
+
+@media(max-width: 964px){
+    .editor {
+
+        .addButtonsGroup {
+            width: 100%;
+            height: 0;
+            justify-content: center;
+            align-items: center;
+            left: 0;
+            right: auto;
+            transform: translateY(12px);
+
+        }
     }
 }
 </style>
